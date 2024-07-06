@@ -7,7 +7,6 @@ from django.contrib.auth.tokens import default_token_generator
 from django.core.mail import EmailMessage, message
 from django.conf import settings
 
-
 def detectUser(user):
     if user.role == 1:
         redirectUrl = 'vendorDashboard'
