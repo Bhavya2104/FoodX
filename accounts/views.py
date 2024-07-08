@@ -96,7 +96,7 @@ def registerVendor(request):
             vendor = v_form.save(commit=False)
             vendor.user = user
             vendor_name = v_form.cleaned_data['vendor_name']
-            # vendor.vendor_slug = slugify(vendor_name)+'-'+str(user.id)
+            vendor.vendor_slug = slugify(vendor_name)+'-'+str(user.id)
             user_profile = UserProfile.objects.get(user=user)
             vendor.user_profile = user_profile
             vendor.save()
@@ -188,6 +188,8 @@ def custDashboard(request):
 @login_required(login_url='login')
 @user_passes_test(check_role_vendor)
 def vendorDashboard(request):
+    print(request.user)
+    print("------------------------------------")
     vendor = Vendor.objects.get(user=request.user)
     # orders = Order.objects.filter(vendors__in=[vendor.id], is_ordered=True).order_by('created_at')
     # recent_orders = orders[:10]
